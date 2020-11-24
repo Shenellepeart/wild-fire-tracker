@@ -4,22 +4,24 @@ import LocationMarker from "./LocationMarker";
 import LocationInfoBox from "./LocationInfoBox";
 
 const Map = ({ center, zoom, eventData }) => {
-    const [locationInfo, setLocationInfo] = useState(null);
+  const [locationInfo, setLocationInfo] = useState(null);
+  const [displayLocationInfo, setDisplayLocationInfo] = useState(false);
 
-    const markers = eventData.map(ev =>{
-        if (ev.categories[0].id === 8) {
-            return (
-              <LocationMarker
-                lat={ev.geometries[0].coordinates[1]}
-                lng={ev.geometries[0].coordinates[0]}
-                onClick={()=> setLocationInfo({id: ev.id, title: ev.title})}
-              />
-            );
-          }
-          return null;
-    })
-  
-  
+  const markers = eventData.map((ev) => {
+    if (ev.categories[0].id === 8) {
+      return (
+        <LocationMarker
+          lat={ev.geometries[0].coordinates[1]}
+          lng={ev.geometries[0].coordinates[0]}
+          onClick={() => {
+            setLocationInfo({ id: ev.id, title: ev.title });
+            setDisplayLocationInfo(!displayLocationInfo);
+          }}
+        />
+      );
+    }
+    return null;
+  });
 
   return (
     <div className="map">
@@ -32,7 +34,7 @@ const Map = ({ center, zoom, eventData }) => {
       >
         {markers}
       </GoogleMapReact>
-      {locationInfo && <LocationInfoBox info={locationInfo} />}
+      {displayLocationInfo && <LocationInfoBox info={locationInfo} />}
     </div>
   );
 };
