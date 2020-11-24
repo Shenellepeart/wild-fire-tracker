@@ -2,13 +2,17 @@
 
 Created App that tracks wildfires around the world
 
-# Usage
+###Usage
+
 npm install
+
 npm start
 
 
 #### Build
 npm run build
+
 or
+
 yarn build
 
