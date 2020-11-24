@@ -2,7 +2,7 @@
 
 Created App that tracks wildfires around the world
 
-###Usage
+### Usage
 
 npm install
 
